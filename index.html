@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #C297B8;
+            color: #FDCFF3;
+            text-align: center;
+        }
+
+        div {
+            height: 300px;
+            width:300px;
+            margin-left: 40%;
+            margin-top: 8%;
+        }
+
+        img {
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>if guess right number that pop up will not show anymore.</h1>
+    <br>
+    <h1>congratulations, you guess right number</h1>
+    <div>
+        <img src="dhyan2.jpg">/internal storage/download/
+    </div>
+    <a href="/internal storage/download/"  style="font-size: 40px;">tic-tac-toe</a>
+    <script>
+        let gamenum = 16;
+        let usernum = prompt("guess the number between(0-50):");
+        while (usernum != gamenum) {
+            usernum = prompt("you entered the wrong number. Guess the right number");
+        }
+        console.log("Congratulations, you guess the right number");
+    </script>
+</body>
+<script src="script.js"></script>
+</html>
