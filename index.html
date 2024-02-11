@@ -7,6 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <style>
+  *{
+    background-color: #C297B8;
+    color: #FDCFF3;
+    text-align: center;
+}
+div{
+    height: 300px;
+    width: 300px;
+    
+    margin-left: 40%;
+    margin-top: 8%;
+    
+}
+img{
+    
+    height: 300px;
+}
+a{
+    text-align: center;
+    font-size: 20px;
+    
+}
+
+    
     
 </style>
 <body>
@@ -16,18 +40,26 @@
     <img src="dhyan2.jpg">
 
 </div>
-<a href="index2.html" style="font-size: 100px;">
-    <ul>tic-tac-toe</ul>
+<ul><a href="index2.html">
+    <li>tic-tac-toe</li>
 </a>
-  <a href="dhyan.html" style="font-size: 100px;">
-    <ul>vowel contuer</ul>
+  <a href="dhyan.html">
+    <li>vowel contuer</li>
 </a>
-  <a href="donot.html" style="font-size: 100px;">
-    <ul>courncy converter</ul>
+  <a href="donot.html">
+    <li>courncy converter</li>
 </a>
-    
+</ul>
     
     
 </body>
-<script src="frist.js"></script>
+<script >
+  let gamenum=16;
+let usernum=prompt("guess the number between(0-50):");
+while(usernum != gamenum){
+    usernum=prompt("you enterd wrong number.guess right number");
+}
+console.log("congratulations,you guess right number");
+
+</script>
 </html>
