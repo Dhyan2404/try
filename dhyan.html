@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel Counter</title>
+    
+</head>
+<body style="background-color: #219EBC;">
+
+    <h1 style="color: #FFB703;">Vowel Counter</h1>
+
+    <label style="color: #FFB703;" for="inputText">Enter something:</label>
+    <input style="background-color: #023047;color: #8ECAE6 ;"  type="text" id="inputText">
+    <button style="background-color: #FB8500;color: #8ECAE6" onclick="countAndDisplay()">Count Vowels</button>
+
+    <p id="resultCount"></p>
+    <p id="resultVowels"></p>
+
+    <script>
+        function findVowels(str) {
+            str = str.toLowerCase();
+            const vowels = ['a', 'e', 'i', 'o', 'u'];
+            const vowelArray = str.split('').filter(char => vowels.includes(char));
+            return {
+                count: vowelArray.length,
+                vowels: vowelArray
+            };
+        }
+
+        function countAndDisplay() {
+            let inputString = document.getElementById("inputText").value;
+            const result = findVowels(inputString);
+            document.getElementById("resultCount").innerHTML = `<span style="color: #FFB703;">Number of vowels: ${result.count}</span>`;
+            document.getElementById("resultVowels").innerHTML = `<span style="color: #FFB703;">Vowels found: ${result.vowels.join(', ')}</span>`;
+        }
+    </script>
+
+</body>
+</html>
