@@ -67,13 +67,22 @@
             background: linear-gradient(red, purple);
             border: .25vmin solid black;
             border-radius: 8px;
-        }</style>
+        }
+        .op{margin-top: 0%;
+        margin-left: 0%;
+        }
+
+        
+        </style>
 </head>
 <body>
     <div class="body">
         <div id="scoreBox">Score: 0</div>
         <div id="hiscoreBox">HiScore: 0</div>
+        <div id="op">swipe on screen to move snake(⬆↔🔽)
+            /arrow key for keybord<div>
         <div id="board"></div>
+    
     </div>
 </body>
 <script >// Game Constants & Variables
@@ -224,5 +233,43 @@
                 break;
         }
     
-    });</script>
+    });
+    // Variables to store touch start coordinates
+let startX = 0;
+let startY = 0;
+
+// Touch start event listener to record initial touch position
+window.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+});
+
+// Touch end event listener to determine swipe direction
+window.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+
+    const dx = endX - startX;
+    const dy = endY - startY;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+        // Horizontal swipe
+        if (dx > 0) {
+            // Swipe right
+            inputDir = { x: 1, y: 0 };
+        } else {
+            // Swipe left
+            inputDir = { x: -1, y: 0 };
+        }
+    } else {
+        // Vertical swipe
+        if (dy > 0) {
+            // Swipe down
+            inputDir = { x: 0, y: 1 };
+        } else {
+            // Swipe up
+            inputDir = { x: 0, y: -1 };
+        }
+    }
+});</script>
 </html>
