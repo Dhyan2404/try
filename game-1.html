@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            background-color: #333;
+            padding: 5px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        .status {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tic Tac Toe</h1>
+        <div class="board" id="board">
+            <div class="cell" onclick="playerMove(0)"></div>
+            <div class="cell" onclick="playerMove(1)"></div>
+            <div class="cell" onclick="playerMove(2)"></div>
+            <div class="cell" onclick="playerMove(3)"></div>
+            <div class="cell" onclick="playerMove(4)"></div>
+            <div class="cell" onclick="playerMove(5)"></div>
+            <div class="cell" onclick="playerMove(6)"></div>
+            <div class="cell" onclick="playerMove(7)"></div>
+            <div class="cell" onclick="playerMove(8)"></div>
+        </div>
+        <div class="status" id="status"></div>
+        <button onclick="reset()">Reset</button>
+    </div>
+
+    <script>
+        let currentPlayer = 'X';
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let gameOver = false;
+
+        const winningCombos = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        const boardElements = document.querySelectorAll('.cell');
+        const statusDisplay = document.getElementById('status');
+
+        function checkWinner() {
+            for (let combo of winningCombos) {
+                const [a, b, c] = combo;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    gameOver = true;
+                    return board[a];
+                }
+            }
+            if (!board.includes('')) {
+                gameOver = true;
+                return 'draw';
+            }
+            return null;
+        }
+
+        function updateStatus() {
+            const winner = checkWinner();
+            if (winner) {
+                if (winner === 'draw') {
+                    statusDisplay.textContent = "It's a draw!";
+                } else {
+                    statusDisplay.textContent = `${winner} wins!`;
+                }
+            } else {
+                statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+            }
+        }
+
+        function playerMove(index) {
+            if (!gameOver && board[index] === '') {
+                board[index] = currentPlayer;
+                boardElements[index].textContent = currentPlayer;
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                updateStatus();
+                if (!gameOver && currentPlayer === 'O') {
+                    setTimeout(aiMove, 500);
+                }
+            }
+        }
+
+        function aiMove() {
+            // Simple AI move: Select a random empty cell
+            const emptyCells = board.reduce((acc, val, index) => {
+                if (val === '') acc.push(index);
+                return acc;
+            }, []);
+
+            const randomIndex = Math.floor(Math.random() * emptyCells.length);
+            const selectedCell = emptyCells[randomIndex];
+            playerMove(selectedCell);
+        }
+
+        function reset() {
+            currentPlayer = 'X';
+            board = ['', '', '', '', '', '', '', '', ''];
+            gameOver = false;
+            boardElements.forEach(cell => cell.textContent = '');
+            updateStatus();
+        }
+
+        updateStatus();
+    </script>
+</body>
+</html>
